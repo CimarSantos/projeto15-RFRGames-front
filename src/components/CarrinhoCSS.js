@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-width: 100vw;
-height: 100vh;
 background-color: #1A0F47;
 `;
 export const NavBar = styled.div`
@@ -30,7 +28,7 @@ img {
 }
 `;
 export const MyItens = styled.div`
-margin: 10px 20px 50px 20px;
+margin: 10px 20px 30px 20px;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
@@ -84,4 +82,27 @@ h1 {
     margin-top: 10px;
     font-size: 22px;
 }
+`;
+export const Options = styled.div`
+display: flex;
+justify-content: space-between;
+margin:10px 20px 10px 20px;
+div{
+    width: 48%;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 12px;
+    font-size: 22px;
+    @media (max-width: 1100px) {
+        padding: 6px;
+    }
+}
+`;
+export const Keep = styled.div`
+background-color: rgba(51, 255, 0, 0.6);
+`;
+export const Back = styled.div`
+background-color: rgba(255, 0, 0, 0.6);
 `;

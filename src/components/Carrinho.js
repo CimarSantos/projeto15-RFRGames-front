@@ -1,4 +1,4 @@
-import { Container, NavBar, MyItens, Item, Amount } from "./CarrinhoCSS";
+import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back } from "./CarrinhoCSS";
 
 export default function Carrinho() {
     const products = [{
@@ -65,6 +65,15 @@ export default function Carrinho() {
                 <h1>Total:</h1>
                 <h1>R$ 197.98</h1>
             </Amount>
+            
+            <Options>
+                <Keep>
+                    Finalizar compra
+                </Keep>
+                <Back>
+                    Voltar para Home
+                </Back>
+            </Options>
 
         </Container>
     )
