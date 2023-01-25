@@ -1,13 +1,26 @@
 import Carrinho from "./components/carrinho/Carrinho.js";
 import GlobalStyle from "./style/GlobalStyle";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Provider from './components/contextAPI/Provider.js';
+
 
 function App() {
   return (
-    <>
-    <GlobalStyle />
-      {/* <h1>RFRGames</h1> */}
-      <Carrinho />
-    </>
+    <BrowserRouter>
+
+      <h1>RFRGames</h1>
+
+      <GlobalStyle />
+
+      <Provider>
+        <Routes>
+
+          <Route path="/carrinho" element={<Carrinho />} />
+
+        </Routes>
+      </Provider>
+
+    </BrowserRouter>
   );
 }
 
