@@ -40,6 +40,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	min-height: 100vh;
+	background-color: #1A0F47;
+	font-family: 'Righteous', cursive;
+	font-family: 'Inter';
 }
 ol, ul {
 	list-style: none;
