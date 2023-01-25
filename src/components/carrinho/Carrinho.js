@@ -1,4 +1,4 @@
-import { Container, NavBar, MyItens, Item, Amount } from "./CarrinhoCSS";
+import { Container, NavBar, MyItens, Item, Amount } from "./CarrinhoCSS.js";
 
 export default function Carrinho() {
     const products = [{
