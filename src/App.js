@@ -1,4 +1,4 @@
-import Carrinho from "./components/Carrinho.js";
+import Carrinho from "./components/carrinho/Carrinho.js";
 import GlobalStyle from "./style/GlobalStyle";
 
 function App() {
