@@ -2,6 +2,7 @@ import Carrinho from "./components/carrinho/Carrinho.js";
 import GlobalStyle from "./style/GlobalStyle";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Provider from './components/contextAPI/Provider.js';
+import Home from "./pages/Home/Home.js";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Routes>
 
           <Route path="/carrinho" element={<Carrinho />} />
+          <Route path="/home" element={<Home />} />
 
         </Routes>
       </Provider>
