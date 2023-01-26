@@ -1,4 +1,4 @@
-import { Container, NavBar, MyItens, Item, Amount } from "./CarrinhoCSS.js";
+import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info } from "./CartCSS.js";
 
 export default function Carrinho() {
     const products = [{
@@ -46,7 +46,7 @@ export default function Carrinho() {
                     <ion-icon name="cart-outline"></ion-icon>
                     <h1>Meu carrinho</h1>
                 </div>
-                <img src="https://w7.pngwing.com/pngs/340/956/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png" alt="user" />
+                <img src="https://img.quizur.com/f/img6241820be92f48.80631095.jpg?lastEdited=1648460306" alt="user" />
             </NavBar>
 
             <MyItens>
@@ -61,10 +61,22 @@ export default function Carrinho() {
                 ))}
             </MyItens>
 
-            <Amount>
-                <h1>Total:</h1>
-                <h1>R$ 197.98</h1>
-            </Amount>
+            <Info>
+
+                <Amount>
+                    <h1>Total:</h1>
+                    <h1>R$ 197.98</h1>
+                </Amount>
+
+                <Options>
+                    <Keep>
+                        Finalizar compra
+                    </Keep>
+                    <Back>
+                        Voltar para Home
+                    </Back>
+                </Options>
+            </Info>
 
         </Container>
     )

@@ -6,8 +6,14 @@ height: 100vh;
 background-color: #1A0F47;
 `;
 export const NavBar = styled.div`
+background-color: #1A0F47;
+width: 100%;
 display: flex;
 justify-content: space-between;
+z-index: 1;
+position: fixed;
+top: 0;
+left: 0;
 div{
     display: flex;
 }
@@ -15,28 +21,33 @@ ion-icon {
     width: 40px;
     height: 40px;
     color: #ffffff;
-    margin: 15px 8px 0 15px
+    margin: 15px 12px 0 18px
 }
 h1 {
-    margin-top: 28px;
-    font-size: 22px;
+    margin-top: 23px;
+    font-size: 25px;
     color: #ffffff;
+    font-family: 'Righteous';
 }
 img {
-    margin: 12px 20px 0 0;
+    margin: 12px 20px 8px 0;
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 `;
 export const MyItens = styled.div`
-margin: 10px 20px 50px 20px;
+margin: 80px auto;
+margin-bottom: 10px;
+width: 88%;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
+overflow-y: scroll;
+height: 78%;
 `;
 export const Item = styled.div`
-margin: 5px 5px 5px 5px;
+margin: 6px 5px 6px 5px;
 background-color: #ffffff;
 width: 335px;
 height: 234px;
@@ -71,17 +82,47 @@ ion-icon {
 }
 `;
 export const Amount = styled.div`
-margin: 0 auto;
-width: 320px;
+margin: 10px 0 10px 0;
 height: 50px;
 background-color: #ffffff;
 border-radius: 5px;
 display: flex;
-box-sizing: border-box;
 padding: 6px;
 justify-content: space-between;
 h1 {
     margin-top: 10px;
     font-size: 22px;
 }
+`;
+export const Options = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+div{
+    width: 48%;
+    border-radius: 5px;
+    padding: 12px;
+    height: 50px;
+    text-align: center;
+    font-size: 22px;
+    font-family: 'Righteous';
+    color: #ffffff;
+    @media (max-width: 1100px) {
+        font-size: 16px;
+        padding: 15px;
+    }
+}
+`;
+export const Keep = styled.div`
+background-color: green;
+`;
+export const Back = styled.div`
+background-color: #A52E1E;
+`;
+export const Info = styled.div`
+width: 100%;
+position: fixed;
+bottom: 0;
+padding: 12px;
+background-color: #1A0F47;
 `;
