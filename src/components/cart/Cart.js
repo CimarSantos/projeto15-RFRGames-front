@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info } from "./CartCSS.js";
 
 export default function Carrinho() {
+    const navigate = useNavigate();
     const products = [{
         name: 'God of War',
         description: 'A very good game. Really cool.',
@@ -55,7 +57,7 @@ export default function Carrinho() {
                         <img src={i.image} alt={i.name} />
                         <div>
                             <h1>R$ {i.price}</h1>
-                            <ion-icon name="trash-outline"></ion-icon>
+                            <ion-icon onClick={() => console.log(index)} name="trash-outline"></ion-icon>
                         </div>
                     </Item>
                 ))}
@@ -69,10 +71,10 @@ export default function Carrinho() {
                 </Amount>
 
                 <Options>
-                    <Keep>
+                    <Keep onClick={() => navigate('/checkout')}>
                         Finalizar compra
                     </Keep>
-                    <Back>
+                    <Back onClick={() => navigate('/home')}>
                         Voltar para Home
                     </Back>
                 </Options>

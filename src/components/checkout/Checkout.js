@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom"
 import { NavBar, MyItens, Item, Amount, Payment, Inputs, CancelButton, BuyButton } from "./CheckoutCSS.js"
 
 export default function Checkout() {
-
+    const navigate = useNavigate(); 
     const cartItens = [{ image: 'https://cdn.akamai.steamstatic.com/steam/apps/1593500/capsule_616x353.jpg?t=1642526157', name: 'God of War', price: 99.99 },
     { image: 'https://cdn.akamai.steamstatic.com/steam/apps/1593500/capsule_616x353.jpg?t=1642526157', name: 'God of War', price: 99.99 }]
 
@@ -42,8 +43,8 @@ export default function Checkout() {
                         maxLength={4} 
                         type='password' 
                         placeholder="Senha"></input>
-                        <BuyButton>Comprar</BuyButton>
-                        <CancelButton>Cancelar</CancelButton>
+                        <BuyButton onClick={() => navigate('/')}>Comprar</BuyButton>
+                        <CancelButton onClick={() => navigate('/cart')}>Ver meu carrinho</CancelButton>
                     </Inputs>
                 </form>
             </Payment>
