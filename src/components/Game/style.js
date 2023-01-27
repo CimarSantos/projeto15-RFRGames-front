@@ -68,7 +68,7 @@ export const StyledFooter = styled.div`
         cursor: pointer;
         width: 30px;
         height: 30px;
-        background-color: #ACACAC;
+        background-color:${props => props.isSelected ? "#4BA81F" : "#ACACAC"};
         border: none;
         border-radius: 50%;
 
