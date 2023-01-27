@@ -1,45 +1,53 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Context from '../contextAPI/Context.js'
 import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info } from "./CartCSS.js";
 
 export default function Carrinho() {
+    const { token } = useContext(Context)
+    const [amount, setAmount] = useState([]);
+    const [products, setProducts] = useState([]);
     const navigate = useNavigate();
-    const products = [{
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }];
+
+    useEffect(() => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        axios.get(`${process.env.REACT_APP_API_URL}/cart`, config)
+            .then((res) => {
+                setProducts(res.data.itens)
+                const prices = [];
+
+                res.data.itens.filter((i) => {
+                    let price = i.value; 
+                    prices.push(price)
+                })
+                let sum = 0;
+                for (let i = 0; i < prices.length; i++) {
+                    sum += prices[i];
+                }
+                setAmount(sum.toFixed(2));
+            })
+            .catch((err) => console.log(err))
+    }, [])
+
+    function deleteItem(id) {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        axios.delete(`${process.env.REACT_APP_API_URL}/cart`, id, config)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+    }
 
     return (
         <Container>
@@ -56,8 +64,8 @@ export default function Carrinho() {
                     <Item key={index}>
                         <img src={i.image} alt={i.name} />
                         <div>
-                            <h1>R$ {i.price}</h1>
-                            <ion-icon onClick={() => console.log(index)} name="trash-outline"></ion-icon>
+                            <h1>R$ {i.value}</h1>
+                            <ion-icon onClick={() => deleteItem(i._id)} name="trash-outline"></ion-icon>
                         </div>
                     </Item>
                 ))}
@@ -67,7 +75,7 @@ export default function Carrinho() {
 
                 <Amount>
                     <h1>Total:</h1>
-                    <h1>R$ 197.98</h1>
+                    <h1>R$ {amount}</h1>
                 </Amount>
 
                 <Options>
