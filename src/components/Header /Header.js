@@ -5,7 +5,12 @@ export default function Header() {
     return (
         <StyledHeader>
             <h1>Bem-vindo(a) , {user.nome}</h1>
-            <img src={user.image} />
+            <div>
+                <button>
+                    <ion-icon name="cart-outline"></ion-icon>
+                </button>
+                <img src={user.image} />
+            </div>
         </StyledHeader>
     );
 }

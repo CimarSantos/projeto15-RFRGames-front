@@ -14,10 +14,36 @@ export const StyledHeader = styled.div`
     h1{
         color: #FFFFFF;
         font-size: 20px;
+        font-family: 'Righteous', cursive;
     }
     img{
         width: 40px;
         height: 40px;
         border-radius: 50%;
+    }
+    ion-icon {
+        width: 30px;
+        height: 30px;
+        color: #FFFFFF;
+    }
+    button{ 
+        width: 40px;
+        height: 40px;
+        border-radius:50%;
+        background-color: #166F96;
+        border: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-right: 10px;
+
+
+    }
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
