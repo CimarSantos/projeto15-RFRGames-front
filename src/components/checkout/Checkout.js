@@ -43,7 +43,7 @@ export default function Checkout() {
                         maxLength={4} 
                         type='password' 
                         placeholder="Senha"></input>
-                        <BuyButton onClick={() => navigate('/')}>Comprar</BuyButton>
+                        <BuyButton onClick={() => navigate('/success')}>Comprar</BuyButton>
                         <CancelButton onClick={() => navigate('/cart')}>Ver meu carrinho</CancelButton>
                     </Inputs>
                 </form>

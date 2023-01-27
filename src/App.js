@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Provider from './components/contextAPI/Provider.js';
 import Home from "./pages/Home/Home.js";
 import Checkout from "./components/checkout/Checkout.js";
+import Success from "./components/success/Success.js";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/home" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/success" element={<Success />} /> 
 
         </Routes>
       </Provider>
