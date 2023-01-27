@@ -61,6 +61,7 @@ img {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 h1 {
+    font-family: 'Inter', sans-serif;
     width: 120px;
     font-size: 20px;
     color: #ffffff;
@@ -90,6 +91,7 @@ display: flex;
 padding: 6px;
 justify-content: space-between;
 h1 {
+    font-family: 'Inter', sans-serif;
     margin-top: 10px;
     font-size: 22px;
 }
