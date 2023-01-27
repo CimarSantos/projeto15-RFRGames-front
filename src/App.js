@@ -5,6 +5,7 @@ import Provider from './components/contextAPI/Provider.js';
 import Home from "./pages/Home/Home.js";
 import Checkout from "./components/checkout/Checkout.js";
 import Success from "./components/success/Success.js";
+import Description from "./pages/Description/Description.js";
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/home" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/success" element={<Success />} /> 
+          <Route path="/success" element={<Success />} />
+          <Route path="/description" element={<Description />} />
 
         </Routes>
       </Provider>

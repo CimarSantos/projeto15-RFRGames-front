@@ -27,6 +27,7 @@ export const StyledHeader = styled.div`
         color: #FFFFFF;
     }
     button{ 
+        cursor: pointer;
         width: 40px;
         height: 40px;
         border-radius:50%;
