@@ -105,7 +105,7 @@ div{
     height: 50px;
     text-align: center;
     font-size: 22px;
-    font-family: 'Righteous';
+    font-family: 'Righteous', sans-serif;
     color: #ffffff;
     @media (max-width: 1100px) {
         font-size: 16px;
