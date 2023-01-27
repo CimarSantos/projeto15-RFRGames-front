@@ -65,6 +65,7 @@ export const StyledFooter = styled.div`
         color:#000000;
     }
     button{
+        cursor: pointer;
         width: 30px;
         height: 30px;
         background-color: #ACACAC;
