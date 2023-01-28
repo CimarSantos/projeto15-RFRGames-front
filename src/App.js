@@ -6,28 +6,25 @@ import Home from "./pages/Home/Home.js";
 import Checkout from "./components/checkout/Checkout.js";
 import Success from "./components/success/Success.js";
 import Description from "./pages/Description/Description.js";
-
+import SignUp from "./components/SignUp/SignUp.js";
 
 function App() {
   return (
     <BrowserRouter>
-
       {/* <h1>RFRGames</h1> */}
 
       <GlobalStyle />
 
       <Provider>
         <Routes>
-
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/home" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/success" element={<Success />} />
           <Route path="/description/:id" element={<Description />} />
-
         </Routes>
       </Provider>
-
     </BrowserRouter>
   );
 }
