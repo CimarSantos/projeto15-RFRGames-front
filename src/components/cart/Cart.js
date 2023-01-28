@@ -11,7 +11,6 @@ export default function Carrinho() {
     const [products, setProducts] = useState([]);
     const [reload, setReload] = useState(false);
     const navigate = useNavigate();
-    console.log(products)
 
     useEffect(() => {
         const config = {
@@ -24,7 +23,7 @@ export default function Carrinho() {
         axios.get(`${process.env.REACT_APP_API_URL}/games`, config)
             .then((res) => {
                 
-                if (res.data.length === 0) {
+                if (res.data.length === 0 || !(res.data)) {
                     setProducts(false);
                     return;
                 }
