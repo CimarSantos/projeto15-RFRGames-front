@@ -19,9 +19,6 @@ export default function Home() {
         }
         setSelected([...selected, objectGame]);
     }
-
-    console.log(selected);
-
     useEffect(() => {
         axios.get("http://localhost:5000/games")
             .then((res) => {
