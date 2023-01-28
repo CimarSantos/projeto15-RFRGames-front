@@ -54,11 +54,13 @@ export const StyledFooter = styled.div`
     justify-content: flex-end;
     align-items: center;
 
-    margin-top:5px;
     width: 100%;
     height: 25px;
     gap: 7px;
 
+    position: absolute;
+    top: 87%;
+    right: 5%;
     font-size: 12px;
 
     p{
