@@ -11,6 +11,7 @@ export const MyItens = styled.div`
 margin: 20px 0 50px 0;
 `;
 export const Item = styled.div`
+font-family: 'Inter', sans-serif;
 background-color: #F8D8D8;
 width: 600px;
 height: 88px;
@@ -29,19 +30,23 @@ img {
 h1 {
     margin: 10px 0 0 10px;
     font-size: 20px;
-    font-family: 'Inter', sans-serif;
 }
 div {
     width: 120px;
     height: 25px;
     padding: 6px;
     color: #ffffff;
-    font-family: 'Inter', sans-serif;
     background-color: green;
     position: absolute;
     right: 0;
     bottom: 12px;
     text-align: center;
+}
+h2 {
+    font-size: 14px;
+    position: absolute;
+    left: 143px;
+    top: 60px
 }
 `;
 export const Amount = styled.div`

@@ -2,13 +2,16 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from '../contextAPI/Context.js'
-import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info } from "./CartCSS.js";
+import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info, NoCart } from "./CartCSS.js";
 
 export default function Carrinho() {
+
     const { token } = useContext(Context)
     const [amount, setAmount] = useState([]);
     const [products, setProducts] = useState([]);
+    const [reload, setReload] = useState(false);
     const navigate = useNavigate();
+    console.log(products)
 
     useEffect(() => {
         const config = {
@@ -17,14 +20,22 @@ export default function Carrinho() {
             }
         };
 
-        axios.get(`${process.env.REACT_APP_API_URL}/cart`, config)
+        //mudar /games para /cart
+        axios.get(`${process.env.REACT_APP_API_URL}/games`, config)
             .then((res) => {
-                setProducts(res.data.itens)
+                
+                if (res.data.length === 0) {
+                    setProducts(false);
+                    return;
+                }
+
+                setProducts(res.data)
+
                 const prices = [];
 
-                res.data.itens.filter((i) => {
-                    let price = i.value; 
-                    prices.push(price)
+                res.data.filter((i) => {
+                    let price = i.value;
+                    prices.push(price);
                 })
                 let sum = 0;
                 for (let i = 0; i < prices.length; i++) {
@@ -33,7 +44,7 @@ export default function Carrinho() {
                 setAmount(sum.toFixed(2));
             })
             .catch((err) => console.log(err))
-    }, [])
+    }, [reload])
 
     function deleteItem(id) {
 
@@ -44,8 +55,11 @@ export default function Carrinho() {
         };
 
         axios.delete(`${process.env.REACT_APP_API_URL}/cart`, id, config)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+            .then((res) => {
+                console.log(res);
+                setReload(!reload)
+            })
+            .catch((err) => console.log(err));
 
     }
 
@@ -59,30 +73,38 @@ export default function Carrinho() {
                 <img src="https://img.quizur.com/f/img6241820be92f48.80631095.jpg?lastEdited=1648460306" alt="user" />
             </NavBar>
 
-            <MyItens>
+            {!products && (<NoCart>
+                <h1>Ahh... Que pena...</h1>
+                <h2>O seu carrinho está vazio</h2>
+                <h3>:(</h3>
+            </NoCart>)}
+
+
+            {products && <MyItens>
                 {products.map((i, index) => (
                     <Item key={index}>
                         <img src={i.image} alt={i.name} />
                         <div>
                             <h1>R$ {i.value}</h1>
+                            <h2>{i.type}</h2>
                             <ion-icon onClick={() => deleteItem(i._id)} name="trash-outline"></ion-icon>
                         </div>
                     </Item>
                 ))}
-            </MyItens>
+            </MyItens>}
 
             <Info>
 
-                <Amount>
+                {products && (<Amount>
                     <h1>Total:</h1>
                     <h1>R$ {amount}</h1>
-                </Amount>
+                </Amount>)}
 
                 <Options>
-                    <Keep onClick={() => navigate('/checkout')}>
+                    {products && (<Keep onClick={() => navigate('/checkout')}>
                         Finalizar compra
-                    </Keep>
-                    <Back onClick={() => navigate('/home')}>
+                    </Keep>)}
+                    <Back position={products} onClick={() => navigate('/home')}>
                         Voltar para Home
                     </Back>
                 </Options>
