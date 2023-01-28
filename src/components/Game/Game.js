@@ -1,17 +1,20 @@
 import { StyledFooter, StyledGame } from "./style";
 
-export default function Game({ image, description, value, name, selectItem, selected }) {
-    const isSelected = selected.includes(name);
+export default function Game(props) {
+    const { objectGame } = props;
+    const { selectItem, selected } = props;
+
+    const isSelected = selected?.includes(objectGame);
 
     return (
         <StyledGame>
-            <img src={image} />
-            <p>{description}</p>
-            <span>{`R$${value}`}</span>
+            <img src={objectGame.image} />
+            <p>{objectGame.description}</p>
+            <span>{`R$${objectGame.value}`}</span>
 
             <StyledFooter isSelected={isSelected}>
                 <p>Adicionar ao carrinho</p>
-                <button onClick={() => selectItem(name)}>
+                <button onClick={() => selectItem(objectGame)}>
                     <ion-icon name="cart-outline"></ion-icon>
                 </button>
             </StyledFooter>
