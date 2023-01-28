@@ -60,6 +60,11 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.flex{
+    display: flex;
+    align-items: center;
+}
 `;
 
 export default GlobalStyle; 
