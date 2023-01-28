@@ -1,20 +1,35 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { StyledBackGround, StyledBodyDescription, StyledButtonsBuyCar, StyledDescription, StyledGoBackHome } from "./syle";
 
 export default function Description() {
-    const games = {
-        name: "GOD OF WAR: RAGNAROK",
-        description: "Com a vingança contra os deuses do Olimpo em um passado distante, Kratos agora vive como um mortal no reino dos deuses e monstros nórdicos.",
-        value: 16.72,
-        image: "https://i.ytimg.com/vi/6fNUO23I_BA/maxresdefault.jpg",
-        type: "Luta",
-        category: "",
-        backgroundImage: "https://image.api.playstation.com/vulcan/ap/rnd/202109/2821/LK1BOGkl8D9asemyQTPNAp69.jpg"
-    };
+    const [games, setGames] = useState();
+    const params = useParams();
+    let name, image, backImage, description, value;
 
-    const { name, image, backgroundImage, description, value } = games;
+    const currentGame = games?.filter((g) => g._id === params.id);
+
+
+    if (currentGame) {
+        name = currentGame[0].name;
+        image = currentGame[0].image;
+        backImage = currentGame[0].backImage;
+        description = currentGame[0].description;
+        value = currentGame[0].value.toLocaleString("pt-br", { minimumFractionDigits: 2 });
+    }
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/games")
+            .then((res) =>
+                setGames(res.data
+                ))
+            .catch((error) => alert(error.response.data));
+    }, []);
+
     return (
         <>
-            <StyledBackGround backgroundImage={backgroundImage} />
+            <StyledBackGround backImage={backImage} />
             <StyledDescription>
                 <h1>{name}</h1>
                 <StyledBodyDescription>
@@ -35,7 +50,9 @@ export default function Description() {
                     </button>
                 </StyledButtonsBuyCar>
 
-                <StyledGoBackHome>Voltar para Home</StyledGoBackHome>
+                <Link to="/home">
+                    <StyledGoBackHome>Voltar para Home</StyledGoBackHome>
+                </Link>
 
 
             </StyledDescription>
