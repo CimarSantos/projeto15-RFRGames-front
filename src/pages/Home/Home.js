@@ -20,6 +20,8 @@ export default function Home() {
         setSelected([...selected, objectGame]);
     }
 
+    console.log(selected);
+
     useEffect(() => {
         axios.get("http://localhost:5000/games")
             .then((res) => {
@@ -31,7 +33,7 @@ export default function Home() {
     }, []);
     return (
         <>
-            <Header />
+            <Header selected={selected} />
             <StyledHomeContainer>
                 <StyledProducts>
                     <h1>Mais vendidos</h1>

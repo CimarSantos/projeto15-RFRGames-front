@@ -4,7 +4,6 @@ import { StyledFooter, StyledGame } from "./style";
 export default function Game(props) {
     const { objectGame } = props;
     const { selectItem, selected } = props;
-    console.log(objectGame);
 
     const isSelected = selected?.includes(objectGame);
 
