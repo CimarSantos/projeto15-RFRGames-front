@@ -1,29 +1,71 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import Logo from "../../assets/imgs/Logotipo.png";
 
 export default function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const Signup = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("As senhas digitadas não coincidem!");
+      return;
+    }
+
+    const request = axios.post("https://rfrgames.onrender.com/sign-up", {
+      name,
+      email,
+      image,
+      password,
+      confirmPassword,
+    });
+    request
+      .then(() => {
+        alert(
+          `Seu cadastro foi feito com sucesso! Você será direcionado para fazer o Login!`
+        );
+        navigate("/");
+      })
+      .catch((err) => {
+        setName("");
+        setEmail("");
+        setImage("");
+        setPassword("");
+        setConfirmPassword("");
+
+        alert(`${err.response} Tente novamente`);
+      });
+  };
   return (
     <>
       <LogoContainer className="flex">
         <img src={Logo} alt="RFRGames" />
       </LogoContainer>
-      <FormStyle className="flex" /* onSubmit={handleForm} */>
+      <FormStyle className="flex" onSubmit={Signup}>
         <input
           type="text"
           placeholder="Nome"
           name="name"
-          /* value={formData.name}
-          onChange={handleInputs} */
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
         />
         <input
           type="email"
           placeholder="Email"
           name="email"
-          /* value={formData.email}
-          onChange={handleInputs} */
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
@@ -31,24 +73,24 @@ export default function SignUp() {
           type="url"
           placeholder="Link da sua foto"
           name="image"
-          /* value={formData.image}
-          onChange={handleInputs} */
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
           required
         />
         <input
           type="password"
           placeholder="Senha"
           name="password"
-          /* value={formData.password}
-          onChange={handleInputs} */
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
         <input
           type="password"
           placeholder="Confirme a senha"
           name="confirmPassword"
-          /*  value={formData.confirmPassword}
-          onChange={handleInputs} */
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
         <button type="submit">Cadastrar</button>
