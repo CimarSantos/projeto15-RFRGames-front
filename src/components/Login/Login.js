@@ -1,21 +1,41 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/imgs/Logotipo.png";
+import { useState, useContext } from "react";
+import axios from "axios";
 
-export default function SignUp() {
+export default function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  /* const { setToken } = useContext(UserContext);
+  const { setUser } = useContext(UserContext); */
+  const handleForm = (e) => {
+    e.preventDefault();
+    const body = { email: email, password: password };
+    axios
+      .post(`https://rfrgames.onrender.com/login`, body)
+      .then((res) => {
+        /* setToken(res.data.token);
+        setUser(res.data); */
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert(`${err.response.data.message} Tente novamente!`);
+      });
+  };
   return (
     <>
       <LogoContainer className="flex">
         <img src={Logo} alt="RFRGames" />
       </LogoContainer>
-      <FormStyle className="flex" /* onSubmit={handleForm} */>
+      <FormStyle className="flex" onSubmit={handleForm}>
         <input
           type="email"
           placeholder="Email"
           name="email"
-          /* value={formData.email}
-          onChange={handleInputs} */
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
@@ -23,16 +43,16 @@ export default function SignUp() {
           type="password"
           placeholder="Senha"
           name="password"
-          /* value={formData.password}
-          onChange={handleInputs} */
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <button type="submit">Entrar</button>
+        <button type="submit">{"Entrar"}</button>
       </FormStyle>
       <Link to="/sign-up">
         <LoginCadastro className="flex">
-          <p>Ainda não tem uma conta? Cadastre-se agora!</p>
+          <p>Aina não tem uma conta? Cadastre-se agora!</p>
         </LoginCadastro>
       </Link>
     </>
@@ -70,6 +90,7 @@ const FormStyle = styled.form`
     border-radius: 5px;
     font-size: 21px;
     color: #fff;
+    cursor: pointer;
   }
 `;
 

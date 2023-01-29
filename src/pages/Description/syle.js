@@ -4,7 +4,7 @@ export const StyledBackGround = styled.div`
     position: absolute;
     width: 100%;
     min-height: 100vh;
-    background-image: url(${props => props.backgroundImage});
+    background-image: url(${props => props.backImage});
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -63,8 +63,10 @@ export const StyledBodyDescription = styled.div`
 `;
 
 export const StyledButtonsBuyCar = styled.div`
-    min-width: 50%; 
+    width: 261px; 
     height: auto;
+
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -96,7 +98,7 @@ export const StyledButtonsBuyCar = styled.div`
 export const StyledGoBackHome = styled.button`
     cursor: pointer;
 
-    min-width: 50%;
+    width: 261px; 
     height: 44px;
 
     background-color: #BA2B2BD4;

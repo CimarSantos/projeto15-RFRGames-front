@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { StyledFooter, StyledGame } from "./style";
 
 export default function Game(props) {
@@ -8,9 +9,11 @@ export default function Game(props) {
 
     return (
         <StyledGame>
-            <img src={objectGame.image} />
+            <Link to={`/description/${objectGame._id}`}>
+                <img src={objectGame.image} />
+            </Link>
             <p>{objectGame.description}</p>
-            <span>{`R$${objectGame.value}`}</span>
+            <span>{`R$${objectGame.value.toLocaleString("pt-br", { minimumFractionDigits: 2 })}`}</span>
 
             <StyledFooter isSelected={isSelected}>
                 <p>Adicionar ao carrinho</p>
