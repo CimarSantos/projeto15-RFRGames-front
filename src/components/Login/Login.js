@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-
 import Logo from "../../assets/imgs/Logotipo.png";
 import { useState, useContext } from "react";
 import axios from "axios";
@@ -11,7 +10,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   /* const { setToken } = useContext(UserContext);
   const { setUser } = useContext(UserContext); */
-
   const handleForm = (e) => {
     e.preventDefault();
     const body = { email: email, password: password };
@@ -26,7 +24,6 @@ export default function Login() {
         alert(`${err.response.data.message} Tente novamente!`);
       });
   };
-
   return (
     <>
       <LogoContainer className="flex">
