@@ -14,7 +14,7 @@ export default function GamesSelectedProvider({ children }) {
     }
 
     return (
-        <GamesSelectedContext.Provider value={{ selected, selected, selectItem }}>
+        <GamesSelectedContext.Provider value={{ selected, selectItem }}>
             {children}
         </GamesSelectedContext.Provider>
     );

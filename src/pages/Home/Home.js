@@ -7,13 +7,14 @@ import { getGames } from "../../services/rfrgames";
 import { StyledGames, StyledHomeContainer, StyledProducts } from "./style";
 
 export default function Home() {
-    const { selected, selectItem } = useContext(GamesSelectedContext);
+    const { selected } = useContext(GamesSelectedContext);
     const { games } = useContext(GamesContext);
 
     const maisVendidos = games?.filter((g) => g.category === "M");
     const novidades = games?.filter((g) => g.category === "N");
     const emBreve = games?.filter((g) => g.category === "E");
 
+    console.log(selected);
 
     return (
         <>
@@ -26,8 +27,6 @@ export default function Home() {
                             <Game
                                 key={g._id}
                                 objectGame={g}
-                                selectItem={selectItem}
-                                selected={selected}
                             />)}
                     </StyledGames>
                 </StyledProducts>
@@ -39,8 +38,6 @@ export default function Home() {
                             <Game
                                 key={g._id}
                                 objectGame={g}
-                                selectItem={selectItem}
-                                selected={selected}
                             />)}
                     </StyledGames>
                 </StyledProducts>
@@ -52,8 +49,6 @@ export default function Home() {
                             <Game
                                 key={g._id}
                                 objectGame={g}
-                                selectItem={selectItem}
-                                selected={selected}
                             />)}
                     </StyledGames>
                 </StyledProducts>

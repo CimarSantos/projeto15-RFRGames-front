@@ -14,6 +14,8 @@ function createHeaders() {
   }
 }
 
+
+
 function signup(body) {
   return axios.post(`${urlBase}/sign-up`, body);
 }
@@ -31,9 +33,14 @@ function getCart() {
   return axios.get(`${urlBase}/cart`, config);
 }
 
-function postCart(body) {
-  const config = createHeaders();
-  return axios.post(`${urlBase}/cart/${body}`, {}, config);
+function postCart(selected) {
+  //testando com o token aleatório
+  const config = {
+    headers: {
+      Authorization: "Bearer 1235847352",
+    },
+  };
+  return axios.post("http://localhost:5000/cart", selected, config);
 }
 
 function deleteCart(id) {
@@ -41,4 +48,4 @@ function deleteCart(id) {
   return axios.delete(`${urlBase}/cart/${id}`, config);
 }
 
-export { signup, login, getGames };
+export { signup, login, getGames, postCart };
