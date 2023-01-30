@@ -6,7 +6,7 @@ import axios from "axios";
 import Context from "../contextAPI/Context.js";
 
 export default function Login() {
-  const { setName, setImage, setToken} = useContext(Context);
+  const { setName, setImage, setToken } = useContext(Context);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,10 +20,10 @@ export default function Login() {
     axios
       .post(`${process.env.REACT_APP_API_URL}/login`, body)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setToken(res.data.token);
-        setName(res.data.name)
-        setImage(res.data.image)
+        setName(res.data.name);
+        setImage(res.data.image);
         navigate("/home");
       })
       .catch((err) => {
