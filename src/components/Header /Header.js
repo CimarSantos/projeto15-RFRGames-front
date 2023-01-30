@@ -10,6 +10,10 @@ export default function Header() {
     const navigate = useNavigate();
 
     function postCartByHeader() {
+        if (selected.length === 0) {
+            return navigate("/cart");
+        }
+
         postCart(selected)
             .then((res) => {
                 alert("Produto adicionado ao carrinho");
