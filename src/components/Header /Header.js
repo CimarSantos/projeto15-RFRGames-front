@@ -17,9 +17,6 @@ export default function Header({ selected }) {
     };
 
     function postCart() {
-        if (selected.length === 0) {
-            return navigate('/cart');
-        };
         axios.post("http://localhost:5000/cart", selected, config)
             .then(() => {
                 navigate('/cart');

@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { GamesContext } from "../../components/contextAPI/GamesContext";
 import { StyledBackGround, StyledBodyDescription, StyledButtonsBuyCar, StyledDescription, StyledGoBackHome } from "./syle";
 
 export default function Description() {
-    const [games, setGames] = useState();
+    const { games } = useContext(GamesContext);
     const params = useParams();
     let name, image, backImage, description, value;
 
@@ -19,14 +20,6 @@ export default function Description() {
         value = currentGame[0].value.toLocaleString("pt-br", { minimumFractionDigits: 2 });
     }
 
-    useEffect(() => {
-        axios.get("http://localhost:5000/games")
-            .then((res) =>
-                setGames(res.data
-                ))
-            .catch((error) => alert(error.response.data));
-    }, []);
-
     return (
         <>
             <StyledBackGround backImage={backImage} />
@@ -40,7 +33,7 @@ export default function Description() {
                 </StyledBodyDescription>
 
                 <StyledButtonsBuyCar>
-                    <button>
+                    <button >
                         <p>Comprar por</p>
                         <span>{`R$${value}`}</span>
                     </button>

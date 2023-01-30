@@ -22,7 +22,11 @@ function login(body) {
   return axios.post(`https://rfrgames.onrender.com/login`, body);
 }
 
-/* function getCart() {
+function getGames() {
+  return axios.get("http://localhost:5000/games");
+}
+
+function getCart() {
   const config = createHeaders();
   return axios.get(`${urlBase}/cart`, config);
 }
@@ -35,6 +39,6 @@ function postCart(body) {
 function deleteCart(id) {
   const config = createHeaders();
   return axios.delete(`${urlBase}/cart/${id}`, config);
-} */
+}
 
-export { signup, login };
+export { signup, login, getGames };
