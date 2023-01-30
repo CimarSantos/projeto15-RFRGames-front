@@ -28,7 +28,7 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err)
-        alert(`${err.response.data.message} Tente novamente!`);
+        alert(`Usuário não enocntrado. Email ou senha incorretos.`);
       });
   };
   return (

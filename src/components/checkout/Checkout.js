@@ -20,7 +20,7 @@ export default function Checkout() {
             }
         };
         //mudar /games para /cart
-        axios.get(`${process.env.REACT_APP_API_URL}/games`, config)
+        axios.get(`${process.env.REACT_APP_API_URL}/cart`, config)
             .then((res) => {
                 if (res.data.length === 0 || !(res.data)) {
                     navigate('/cart')
