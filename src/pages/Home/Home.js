@@ -1,12 +1,14 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { GamesContext } from "../../components/contextAPI/GamesContext";
 import Game from "../../components/Game/Game";
 import Header from "../../components/Header /Header";
+import { getGames } from "../../services/rfrgames";
 import { StyledGames, StyledHomeContainer, StyledProducts } from "./style";
 
 export default function Home() {
     const [selected, setSelected] = useState([]);
-    const [games, setGames] = useState(undefined);
+    const { games } = useContext(GamesContext);
+    console.log(games);
 
     const maisVendidos = games?.filter((g) => g.category === "M");
     const novidades = games?.filter((g) => g.category === "N");
@@ -19,15 +21,7 @@ export default function Home() {
         }
         setSelected([...selected, objectGame]);
     }
-    useEffect(() => {
-        axios.get("http://localhost:5000/games")
-            .then((res) => {
-                setGames(res.data);
-            })
-            .catch((error) => {
-                console.log(error.response);
-            });
-    }, []);
+
     return (
         <>
             <Header selected={selected} />
