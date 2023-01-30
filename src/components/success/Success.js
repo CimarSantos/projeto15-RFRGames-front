@@ -1,11 +1,27 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { InfinitySpin } from "react-loader-spinner";
 import { Box, Thanks } from "./SuccessCSS.js";
+import axios from "axios";
+import Context from "../contextAPI/Context.js";
 
 export default function Success() {
+    const { token } = useContext(Context);
     const navigate = useNavigate(); 
+
     useEffect(() => {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        axios.delete(`${process.env.REACT_APP_API_URL}/saled`, config)
+        .then((res) => {console.log(res.data)})
+        .catch((err) => {console.log(err)})
+
+
         setTimeout(() => {
             navigate('/home')
         }, 4500);
