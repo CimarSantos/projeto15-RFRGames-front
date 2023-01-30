@@ -14,8 +14,6 @@ export default function Home() {
     const novidades = games?.filter((g) => g.category === "N");
     const emBreve = games?.filter((g) => g.category === "E");
 
-    console.log(selected);
-
     return (
         <>
             <Header selected={selected} />
