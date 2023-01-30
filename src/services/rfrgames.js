@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const urlBase = process.env.REACT_APP_API_BASE_URL;
+const urlBase = process.env.REACT_APP_API_URL;
 
 function createHeaders() {
   const auth = JSON.parse(localStorage.getItem("rfrgames"));
@@ -21,11 +21,11 @@ function signup(body) {
 }
 
 function login(body) {
-  return axios.post(`https://rfrgames.onrender.com/login`, body);
+  return axios.post(`${urlBase}/login`, body);
 }
 
 function getGames() {
-  return axios.get("http://localhost:5000/games");
+  return axios.get(`${urlBase}/games`);
 }
 
 function getCart() {
@@ -34,18 +34,17 @@ function getCart() {
 }
 
 function postCart(selected) {
-  //testando com o token aleatório
   const config = {
     headers: {
-      Authorization: "Bearer 1235847352",
+      Authorization: "Bearer ecadbfa2-456c-407d-8023-444135c78ad2",
     },
   };
-  return axios.post("http://localhost:5000/cart", selected, config);
+  return axios.post(`${urlBase}/cart`, selected, config);
 }
 
-function deleteCart(id) {
-  const config = createHeaders();
-  return axios.delete(`${urlBase}/cart/${id}`, config);
-}
+// function deleteCart(id) {
+//   const config = createHeaders();
+//   return axios.delete(`${urlBase}/cart/${id}`, config);
+// }
 
 export { signup, login, getGames, postCart };
