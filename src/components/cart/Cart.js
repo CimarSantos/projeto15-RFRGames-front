@@ -1,45 +1,67 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info } from "./CartCSS.js";
+import Context from '../contextAPI/Context.js'
+import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info, NoCart } from "./CartCSS.js";
 
 export default function Carrinho() {
+
+    const { token, image } = useContext(Context)
+    const [amount, setAmount] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [reload, setReload] = useState(false);
     const navigate = useNavigate();
-    const products = [{
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }, {
-        name: 'God of War',
-        description: 'A very good game. Really cool.',
-        price: 99.99,
-        image: 'https://files.tecnoblog.net/wp-content/uploads/2022/01/god-of-war-2018-004-1060x596.jpg',
-        type: 'action-adventura'
-    }];
+
+    useEffect(() => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        //mudar /games para /cart
+        axios.get(`${process.env.REACT_APP_API_URL}/cart`, config)
+            .then((res) => {
+                console.log(res.data)
+                
+                if (res.data.length === 0 || !(res.data)) {
+                    setProducts(false);
+                    return;
+                }
+
+                setProducts(res.data)
+
+                const prices = [];
+
+                res.data.filter((i) => {
+                    let price = i.value;
+                    prices.push(price);
+                })
+                let sum = 0;
+                for (let i = 0; i < prices.length; i++) {
+                    sum += prices[i];
+                }
+                setAmount(sum.toFixed(2));
+            })
+            .catch((err) => console.log(err))
+    }, [reload])
+
+    function deleteItem(id) {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
+        axios.delete(`${process.env.REACT_APP_API_URL}/cart`, id, config)
+            .then((res) => {
+                console.log(res);
+                setReload(!reload)
+            })
+            .catch((err) => console.log(err));
+
+    }
 
     return (
         <Container>
@@ -48,33 +70,41 @@ export default function Carrinho() {
                     <ion-icon name="cart-outline"></ion-icon>
                     <h1>Meu carrinho</h1>
                 </div>
-                <img src="https://img.quizur.com/f/img6241820be92f48.80631095.jpg?lastEdited=1648460306" alt="user" />
+                <img src={image} alt="user" />
             </NavBar>
 
-            <MyItens>
+            {!products && (<NoCart>
+                <h1>Ahh... Que pena...</h1>
+                <h2>O seu carrinho está vazio</h2>
+                <h3>:(</h3>
+            </NoCart>)}
+
+
+            {products && <MyItens>
                 {products.map((i, index) => (
                     <Item key={index}>
                         <img src={i.image} alt={i.name} />
                         <div>
-                            <h1>R$ {i.price}</h1>
-                            <ion-icon onClick={() => console.log(index)} name="trash-outline"></ion-icon>
+                            <h1>R$ {i.value}</h1>
+                            <h2>{i.type}</h2>
+                            <ion-icon onClick={() => deleteItem(i._id)} name="trash-outline"></ion-icon>
                         </div>
                     </Item>
                 ))}
-            </MyItens>
+            </MyItens>}
 
             <Info>
 
-                <Amount>
+                {products && (<Amount>
                     <h1>Total:</h1>
-                    <h1>R$ 197.98</h1>
-                </Amount>
+                    <h1>R$ {amount}</h1>
+                </Amount>)}
 
                 <Options>
-                    <Keep onClick={() => navigate('/checkout')}>
+                    {products && (<Keep onClick={() => navigate('/checkout')}>
                         Finalizar compra
-                    </Keep>
-                    <Back onClick={() => navigate('/home')}>
+                    </Keep>)}
+                    <Back position={products} onClick={() => navigate('/home')}>
                         Voltar para Home
                     </Back>
                 </Options>

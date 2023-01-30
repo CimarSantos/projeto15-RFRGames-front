@@ -61,6 +61,7 @@ img {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 h1 {
+    font-family: 'Inter', sans-serif;
     width: 120px;
     font-size: 20px;
     color: #ffffff;
@@ -77,8 +78,13 @@ div {
 ion-icon {
     width: 28px;
     height: 28px;
-    margin: 12px 12px 0 0;
+    margin: 12px 16px 0 0;
     color: #979797;
+}
+h2 {
+    margin: 20px 120px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
 }
 `;
 export const Amount = styled.div`
@@ -90,6 +96,7 @@ display: flex;
 padding: 6px;
 justify-content: space-between;
 h1 {
+    font-family: 'Inter', sans-serif;
     margin-top: 10px;
     font-size: 22px;
 }
@@ -97,15 +104,14 @@ h1 {
 export const Options = styled.div`
 width: 100%;
 display: flex;
-justify-content: space-between;
+justify-content: ${props => props.position ? 'space-between' :  'center'};
 div{
-    width: 48%;
     border-radius: 5px;
     padding: 12px;
     height: 50px;
     text-align: center;
     font-size: 22px;
-    font-family: 'Righteous';
+    font-family: 'Righteous', sans-serif;
     color: #ffffff;
     @media (max-width: 1100px) {
         font-size: 16px;
@@ -115,9 +121,12 @@ div{
 `;
 export const Keep = styled.div`
 background-color: green;
+width: 48%;
 `;
 export const Back = styled.div`
 background-color: #A52E1E;
+margin-left: 10px;
+width: ${props => props.position ? '48%' : '100%'};
 `;
 export const Info = styled.div`
 width: 100%;
@@ -125,4 +134,15 @@ position: fixed;
 bottom: 0;
 padding: 12px;
 background-color: #1A0F47;
+`;
+export const NoCart = styled.div`
+text-align: center;
+font-family: 'Righteous', sans-serif;
+font-size: 32px;
+color: #ffffff;
+width: 40%;
+margin: 250px auto;
+@media (max-width: 500px) {
+    font-size: 22px;
+}
 `;
