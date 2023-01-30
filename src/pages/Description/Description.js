@@ -1,11 +1,15 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { GamesContext } from "../../components/contextAPI/GamesContext";
+import { GamesSelectedContext } from "../../components/contextAPI/GamesSelectedContext";
+import { postCart } from "../../services/rfrgames";
 import { StyledBackGround, StyledBodyDescription, StyledButtonsBuyCar, StyledDescription, StyledGoBackHome } from "./syle";
 
 export default function Description() {
+    const { selected, selectItem } = useContext(GamesSelectedContext);
     const { games } = useContext(GamesContext);
+    const navigate = useNavigate();
+
     const params = useParams();
     let name, image, backImage, description, value;
 
@@ -18,6 +22,28 @@ export default function Description() {
         backImage = currentGame[0].backImage;
         description = currentGame[0].description;
         value = currentGame[0].value.toLocaleString("pt-br", { minimumFractionDigits: 2 });
+    }
+
+    function selectedByDescription() {
+        if (selected.includes(currentGame[0])) {
+            navigate("/home");
+        }
+        else {
+            selectItem(currentGame[0]);
+            navigate("/home");
+        }
+    }
+
+    function buy() {
+        postCart(currentGame[0])
+            .then((res) => {
+                console.log(res.data);
+                navigate("/checkout");
+            })
+            .catch((err) => {
+                alert("Não foi possível redirecionar à compra");
+                console.log(err.response.data);
+            });
     }
 
     return (
@@ -33,11 +59,11 @@ export default function Description() {
                 </StyledBodyDescription>
 
                 <StyledButtonsBuyCar>
-                    <button >
+                    <button onClick={buy} >
                         <p>Comprar por</p>
                         <span>{`R$${value}`}</span>
                     </button>
-                    <button>
+                    <button onClick={() => selectedByDescription()}>
                         <ion-icon name="cart-outline"></ion-icon>
                         <p>Adicionar ao carrinho</p>
                     </button>

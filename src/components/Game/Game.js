@@ -1,10 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { GamesSelectedContext } from "../contextAPI/GamesSelectedContext";
 import { StyledFooter, StyledGame } from "./style";
 
 export default function Game(props) {
+    const { selected, selectItem } = useContext(GamesSelectedContext);
     const { objectGame } = props;
-    const { selectItem, selected } = props;
-
     const isSelected = selected?.includes(objectGame);
 
     return (

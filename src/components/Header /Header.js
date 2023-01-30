@@ -2,35 +2,33 @@ import axios from "axios";
 import { config } from "localforage";
 import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { postCart } from "../../services/rfrgames";
 import Context from "../contextAPI/Context";
+import { GamesSelectedContext } from "../contextAPI/GamesSelectedContext";
 import { StyledHeader } from "./style";
 
-export default function Header({ selected }) {
+export default function Header() {
     const user = { nome: "Bob", image: "https://yt3.googleusercontent.com/ytc/AL5GRJWF9DhK1icziCNSd-0dyRCDbOU3_op5GLtFSJo0WA=s900-c-k-c0x00ffffff-no-rj" };
+    const { selected } = useContext(GamesSelectedContext);
     const navigate = useNavigate();
-    const token = 1235847352;
 
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
-
-    function postCart() {
-        axios.post("http://localhost:5000/cart", selected, config)
-            .then(() => {
-                navigate('/cart');
+    function postCartByHeader() {
+        postCart(selected)
+            .then((res) => {
+                alert("Produto adicionado ao carrinho");
+                console.log(res.data);
+                navigate("/cart");
             })
             .catch((err) => {
-                alert(err.response.data);
-            });
+                console.log(err);
+            });;
     }
 
     return (
         <StyledHeader>
             <h1>Bem-vindo(a) , {user.nome}</h1>
             <div>
-                <button onClick={postCart}>
+                <button onClick={postCartByHeader}>
                     <ion-icon name="cart-outline"></ion-icon>
                 </button>
                 <img src={user.image} />
