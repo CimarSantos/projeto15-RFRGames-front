@@ -6,7 +6,7 @@ import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info, No
 
 export default function Carrinho() {
 
-    const { token } = useContext(Context)
+    const { token, image } = useContext(Context)
     const [amount, setAmount] = useState([]);
     const [products, setProducts] = useState([]);
     const [reload, setReload] = useState(false);
@@ -69,7 +69,7 @@ export default function Carrinho() {
                     <ion-icon name="cart-outline"></ion-icon>
                     <h1>Meu carrinho</h1>
                 </div>
-                <img src="https://img.quizur.com/f/img6241820be92f48.80631095.jpg?lastEdited=1648460306" alt="user" />
+                <img src={image} alt="user" />
             </NavBar>
 
             {!products && (<NoCart>

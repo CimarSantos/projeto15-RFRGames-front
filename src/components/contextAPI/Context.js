@@ -2,7 +2,8 @@ import { createContext } from "react";
 
 const Context = createContext({
     token: null,
-    id: null
+    name: null,
+    image: null
 });
 
 export default Context; 
