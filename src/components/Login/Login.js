@@ -3,24 +3,31 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/imgs/Logotipo.png";
 import { useState, useContext } from "react";
 import axios from "axios";
+import Context from "../contextAPI/Context.js";
 
 export default function Login() {
+  const { setName, setImage, setToken} = useContext(Context);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  /* const { setToken } = useContext(UserContext);
-  const { setUser } = useContext(UserContext); */
+
+
   const handleForm = (e) => {
     e.preventDefault();
-    const body = { email: email, password: password };
+
+    const body = { email, password };
+
     axios
-      .post(`https://rfrgames.onrender.com/login`, body)
+      .post(`${process.env.REACT_APP_API_URL}/login`, body)
       .then((res) => {
-        /* setToken(res.data.token);
-        setUser(res.data); */
+        console.log(res.data)
+        setToken(res.data.token);
+        setName(res.data.name)
+        setImage(res.data.image)
         navigate("/home");
       })
       .catch((err) => {
+        console.log(err)
         alert(`${err.response.data.message} Tente novamente!`);
       });
   };

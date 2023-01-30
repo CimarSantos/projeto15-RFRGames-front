@@ -30,13 +30,15 @@ export default function SignUp() {
       confirmPassword,
     });
     request
-      .then(() => {
+      .then((res) => {
+        console.log(res.data)
         alert(
           `Seu cadastro foi feito com sucesso! Você será direcionado para fazer o Login!`
         );
         navigate("/");
       })
       .catch((err) => {
+        console.log(err)
         setName("");
         setEmail("");
         setImage("");
