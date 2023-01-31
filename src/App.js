@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp/SignUp.js";
 import Login from "./components/Login/Login.js";
 import GamesProvider from "./components/contextAPI/GamesContext.js";
 import GamesSelectedProvider from "./components/contextAPI/GamesSelectedContext.js";
+import UserProvider from "./components/contextAPI/UserContext.js";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
 
       <GlobalStyle />
 
-      <Provider>
+      <UserProvider>
         <GamesProvider>
           <GamesSelectedProvider>
             <Routes>
@@ -33,7 +34,7 @@ function App() {
             </Routes>
           </GamesSelectedProvider>
         </GamesProvider>
-      </Provider>
+      </UserProvider>
     </BrowserRouter>
   );
 }
