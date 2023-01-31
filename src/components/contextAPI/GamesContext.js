@@ -10,7 +10,6 @@ export default function GamesProvider({ children }) {
         getGames()
             .then((res) => {
                 setGames(res.data);
-                console.log(res.data);
             })
             .catch((error) => {
                 console.log(error.response);

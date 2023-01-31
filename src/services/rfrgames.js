@@ -3,7 +3,7 @@ import axios from "axios";
 const urlBase = process.env.REACT_APP_API_URL;
 
 function createHeaders() {
-  const auth = JSON.parse(localStorage.getItem("rfrgames"));
+  const auth = JSON.parse(localStorage.getItem("user"));
   if (auth) {
     const config = {
       headers: {
@@ -13,8 +13,6 @@ function createHeaders() {
     return config;
   }
 }
-
-
 
 function signup(body) {
   return axios.post(`${urlBase}/sign-up`, body);
@@ -28,19 +26,15 @@ function getGames() {
   return axios.get(`${urlBase}/games`);
 }
 
-function getCart() {
-  const config = createHeaders();
-  return axios.get(`${urlBase}/cart`, config);
-}
-
 function postCart(selected) {
-  const config = {
-    headers: {
-      Authorization: "Bearer ecadbfa2-456c-407d-8023-444135c78ad2",
-    },
-  };
+  const config = createHeaders();
   return axios.post(`${urlBase}/cart`, selected, config);
 }
+
+// function getCart() {
+//   const config = createHeaders();
+//   return axios.get(`${urlBase}/cart`, config);
+// }
 
 // function deleteCart(id) {
 //   const config = createHeaders();

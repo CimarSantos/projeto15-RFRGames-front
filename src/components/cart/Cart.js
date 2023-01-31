@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Context from '../contextAPI/Context.js'
+import Context from '../contextAPI/Context.js';
+import { UserContext } from "../contextAPI/UserContext.js";
 import { Container, NavBar, MyItens, Item, Amount, Options, Keep, Back, Info, NoCart } from "./CartCSS.js";
 
 export default function Carrinho() {
 
-    const { token, image } = useContext(Context)
+    const { user } = useContext(UserContext);
     const [amount, setAmount] = useState([]);
     const [products, setProducts] = useState([]);
     const [reload, setReload] = useState(false);
@@ -15,49 +16,49 @@ export default function Carrinho() {
     useEffect(() => {
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${user.token}`
             }
         };
 
         //mudar /games para /cart
         axios.get(`${process.env.REACT_APP_API_URL}/cart`, config)
             .then((res) => {
-                console.log(res.data)
-                
+                console.log(res.data);
+
                 if (res.data.length === 0 || !(res.data)) {
                     setProducts(false);
                     return;
                 }
 
-                setProducts(res.data)
+                setProducts(res.data);
 
                 const prices = [];
 
                 res.data.filter((i) => {
                     let price = i.value;
                     prices.push(price);
-                })
+                });
                 let sum = 0;
                 for (let i = 0; i < prices.length; i++) {
                     sum += prices[i];
                 }
                 setAmount(sum.toFixed(2));
             })
-            .catch((err) => console.log(err))
-    }, [reload])
+            .catch((err) => console.log(err));
+    }, [reload]);
 
     function deleteItem(id) {
 
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${user.token}`
             }
         };
 
         axios.delete(`${process.env.REACT_APP_API_URL}/cart`, id, config)
             .then((res) => {
                 console.log(res);
-                setReload(!reload)
+                setReload(!reload);
             })
             .catch((err) => console.log(err));
 
@@ -70,7 +71,7 @@ export default function Carrinho() {
                     <ion-icon name="cart-outline"></ion-icon>
                     <h1>Meu carrinho</h1>
                 </div>
-                <img src={image} alt="user" />
+                <img src={user.image} alt="user" />
             </NavBar>
 
             {!products && (<NoCart>
@@ -111,5 +112,5 @@ export default function Carrinho() {
             </Info>
 
         </Container>
-    )
+    );
 }
