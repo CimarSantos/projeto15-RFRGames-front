@@ -21,7 +21,6 @@ export default function Login() {
     axios
       .post(`${process.env.REACT_APP_API_URL}/login`, body)
       .then((res) => {
-        console.log(res.data);
         const { name, image, token } = res.data;
         setUser({ name, image, token });
         localStorage.setItem("user", JSON.stringify({ name, image, token }));
