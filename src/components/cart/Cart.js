@@ -28,8 +28,11 @@ export default function Carrinho() {
                     setProducts(false);
                     return;
                 }
-
-                setProducts(res.data)
+                for (let x = 0; x < res.data.length; x++) {
+                    console.log(res.data[x].data)
+                    setProducts(res.data[x].data)
+                }
+                setProducts(res.data.data)
 
                 const prices = [];
 
