@@ -22,7 +22,7 @@ export default function SignUp() {
       return;
     }
 
-    const request = axios.post("https://rfrgames.onrender.com/sign-up", {
+    const request = axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, {
       name,
       email,
       image,
@@ -31,14 +31,14 @@ export default function SignUp() {
     });
     request
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         alert(
           `Seu cadastro foi feito com sucesso! Você será direcionado para fazer o Login!`
         );
         navigate("/");
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setName("");
         setEmail("");
         setImage("");

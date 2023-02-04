@@ -1,39 +1,39 @@
-import axios from "axios";
-import { config } from "localforage";
 import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import Context from "../contextAPI/Context.js";
+import { useNavigate } from "react-router-dom";
+import { postCart } from "../../services/rfrgames";
+import { GamesSelectedContext } from "../contextAPI/GamesSelectedContext";
+import { UserContext } from "../contextAPI/UserContext";
 import { StyledHeader } from "./style";
 
-export default function Header({ selected }) {
-    // const user = { nome: "Bob", image: "https://yt3.googleusercontent.com/ytc/AL5GRJWF9DhK1icziCNSd-0dyRCDbOU3_op5GLtFSJo0WA=s900-c-k-c0x00ffffff-no-rj" };
+export default function Header() {
+    const { user } = useContext(UserContext);
+    const { selected } = useContext(GamesSelectedContext);
     const navigate = useNavigate();
     const { token, image, name } = useContext(Context);
 
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
 
-    function postCart() {
+    function postCartByHeader() {
         if (selected.length === 0) {
-            return navigate('/cart');
-        };
-        axios.post("http://localhost:5000/cart", selected, config)
-            .then(() => {
-                navigate('/cart');
+            return navigate("/cart");
+        }
+
+        postCart(selected)
+            .then((res) => {
+                alert("Produto adicionado ao carrinho");
+                console.log(res.data);
+                navigate("/cart");
             })
             .catch((err) => {
-                alert(err.response.data);
-            });
+                console.log(err);
+            });;
     }
 
     return (
         <StyledHeader>
             <h1>Bem-vindo(a) , {name}</h1>
             <div>
-                <button onClick={postCart}>
+                <button onClick={postCartByHeader}>
                     <ion-icon name="cart-outline"></ion-icon>
                 </button>
                 <img src={image} />

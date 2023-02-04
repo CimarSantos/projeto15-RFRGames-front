@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const urlBase = process.env.REACT_APP_API_BASE_URL;
+const urlBase = process.env.REACT_APP_API_URL;
 
 function createHeaders() {
-  const auth = JSON.parse(localStorage.getItem("rfrgames"));
+  const auth = JSON.parse(localStorage.getItem("user"));
   if (auth) {
     const config = {
       headers: {
@@ -19,22 +19,26 @@ function signup(body) {
 }
 
 function login(body) {
-  return axios.post(`https://rfrgames.onrender.com/login`, body);
+  return axios.post(`${urlBase}/login`, body);
 }
 
-/* function getCart() {
-  const config = createHeaders();
-  return axios.get(`${urlBase}/cart`, config);
+function getGames() {
+  return axios.get(`${urlBase}/games`);
 }
 
-function postCart(body) {
+function postCart(selected) {
   const config = createHeaders();
-  return axios.post(`${urlBase}/cart/${body}`, {}, config);
+  return axios.post(`${urlBase}/cart`, selected, config);
 }
 
-function deleteCart(id) {
-  const config = createHeaders();
-  return axios.delete(`${urlBase}/cart/${id}`, config);
-} */
+// function getCart() {
+//   const config = createHeaders();
+//   return axios.get(`${urlBase}/cart`, config);
+// }
 
-export { signup, login };
+// function deleteCart(id) {
+//   const config = createHeaders();
+//   return axios.delete(`${urlBase}/cart/${id}`, config);
+// }
+
+export { signup, login, getGames, postCart };

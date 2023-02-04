@@ -4,9 +4,10 @@ import Logo from "../../assets/imgs/Logotipo.png";
 import { useState, useContext } from "react";
 import axios from "axios";
 import Context from "../contextAPI/Context.js";
+import { UserContext } from "../contextAPI/UserContext";
 
 export default function Login() {
-  const { setName, setImage, setToken} = useContext(Context);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,14 +21,16 @@ export default function Login() {
     axios
       .post(`${process.env.REACT_APP_API_URL}/login`, body)
       .then((res) => {
-        console.log(res.data)
-        setToken(res.data.token);
-        setName(res.data.name)
-        setImage(res.data.image)
+        const { name, image, token } = res.data;
+        setUser({ name, image, token });
+        localStorage.setItem("user", JSON.stringify({ name, image, token }));
+        // setToken(res.data.token);
+        // setName(res.data.name);
+        // setImage(res.data.image);
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         alert(`Usuário não enocntrado. Email ou senha incorretos.`);
       });
   };

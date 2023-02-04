@@ -3,21 +3,23 @@ import Context from './Context.js';
 
 const Provider = ({ children }) => {
     const [token, setToken] = useState();
-    const [name, setName] = useState(); 
+    const [name, setName] = useState();
     const [image, setImage] = useState();
+
+    console.log(token, name, image);
 
     return (
         <Context.Provider value={{
             token,
             setToken,
-            name, 
+            name,
             setName,
             image,
             setImage
         }}>
             {children}
         </Context.Provider>
-    )
-}
+    );
+};
 
 export default Provider;
