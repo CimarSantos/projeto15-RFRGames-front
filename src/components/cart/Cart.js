@@ -28,18 +28,22 @@ export default function Carrinho() {
                     setProducts(false);
                     return;
                 }
-                for (let x = 0; x < res.data.length; x++) {
-                    console.log(res.data[x].data)
-                    setProducts(res.data[x].data)
-                }
-                setProducts(res.data.data)
 
                 const prices = [];
 
-                res.data.filter((i) => {
-                    let price = i.value;
-                    prices.push(price);
-                })
+                for (let x = 0; x < res.data.length; x++) {
+                    let item = res.data[x];
+                    console.log(item.data)
+                    setProducts(item.data)
+
+                    item.data.filter((i) => {
+                        console.log('i', i.value)
+                        let price = i.value;
+                        prices.push(price);
+                    })
+                }
+                console.log(prices)
+
                 let sum = 0;
                 for (let i = 0; i < prices.length; i++) {
                     sum += prices[i];
